@@ -18,7 +18,7 @@ app.setValidatorCompiler(validatorCompiler);
 
 app.setErrorHandler(errorHandler);
 
-if (env.NODE_ENV === "prod") {
+if (env.NODE_ENV !== "prod") {
   await app.register(import("@fastify/swagger"), {
     openapi: {
       info: {
