@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx --env-file .env watch ./src/server.ts",
+    "start": "node --env-file .env --watch ./dist/server.js",
     "test": "vitest run",
     "setup:db": "tsx --env-file .env ./src/setup.ts"
   },
@@ -32,6 +33,7 @@
     "fastify-type-provider-zod": "^6.0.0",
     "postgres": "3.4.3",
     "redis": "4.6.13",
+    "tsup": "8.5.0",
     "uuid": "13.0.0",
     "zod": "4.1.11"
   }

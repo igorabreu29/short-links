@@ -1,0 +1,35 @@
+FROM node:24.7-slim AS base
+
+RUN npm i -g pnpm
+
+FROM base AS dependencies
+
+WORKDIR /usr/app
+
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install
+
+FROM base AS build
+
+WORKDIR /usr/app
+
+COPY . .
+COPY --from=dependencies /usr/app/node_modules ./node_modules
+
+RUN pnpm build
+RUN pnpm prune --prod
+
+FROM node:24.7-alpine3.21 AS deploy
+
+WORKDIR /usr/app
+
+RUN npm i -g pnpm
+
+COPY --from=build /usr/app/dist ./dist
+COPY --from=build /usr/app/node_modules ./node_modules
+COPY --from=build /usr/app/package.json ./package.json
+
+EXPOSE 3333
+
+CMD ["pnpm", "start"]
