@@ -22,7 +22,7 @@ if (env.NODE_ENV !== "prod") {
   await app.register(import("@fastify/swagger"), {
     openapi: {
       info: {
-        title: "FastFeet Auth Api Docs",
+        title: "Short links Api Docs",
         version: "1.0.0",
       },
       components: {
