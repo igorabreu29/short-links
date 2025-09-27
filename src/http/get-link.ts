@@ -47,7 +47,7 @@ export const getLink: FastifyPluginCallbackZod = (app) => {
 
       const link = result[0];
 
-      await redis.set("links", `links:${code}`, {
+      await redis.set(`links:${code}`, JSON.stringify(link), {
         EX: 60 * 10, // 10 minutes
       });
       await redis.zIncrBy("metrics", 1, link.id);

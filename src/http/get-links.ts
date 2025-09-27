@@ -42,8 +42,10 @@ export const getLinks: FastifyPluginCallbackZod = (app) => {
       const links = await sql<Link[]>`
         SELECT *
         FROM short_links
-        ORDER BY created_at DESC
+        ORDER BY created_at DESC;
       `;
+
+      console.log(links);
 
       await redis.set("links", JSON.stringify(links), {
         EX: 60 * 10, // 10 minutes,

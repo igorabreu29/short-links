@@ -47,7 +47,7 @@ describe("Get links (E2E)", () => {
       createdAt: new Date("2025-01-02"),
     });
 
-    const link2 = await makeShortLink({
+    await makeShortLink({
       createdAt: new Date("2025-01-01"),
     });
 

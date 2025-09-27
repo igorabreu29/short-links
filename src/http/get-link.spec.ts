@@ -4,6 +4,7 @@ import { app } from "@/app.ts";
 import { makeRequest } from "@/factories/make-request.ts";
 import { makeShortLink } from "@/factories/make-short-link.ts";
 import { StatusCode } from "@/utils/status-code.ts";
+import { redis } from "@/lib/redis.ts";
 
 describe("Get link (E2E)", () => {
   beforeAll(async () => {
@@ -20,6 +21,18 @@ describe("Get link (E2E)", () => {
     });
 
     expect(response.statusCode).toEqual(StatusCode.BAD_REQUEST);
+  });
+
+  it("[GET /links/:code] should get cached link", async () => {
+    const link = await makeShortLink();
+
+    await redis.set(`links:${link.code}`, JSON.stringify(link));
+
+    const response = await makeRequest<"get">("get", {
+      url: `/links/${link.code}`,
+    });
+
+    expect(response.statusCode).toEqual(StatusCode.MOVED_PERMANENTLY);
   });
 
   it("[GET /links/:code] should get link", async () => {

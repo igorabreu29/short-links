@@ -2,9 +2,9 @@ import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import z from "zod";
 import { ConflictError } from "@/errors/conflict-error.ts";
 import { sql } from "@/lib/postgres.ts";
+import { redis } from "@/lib/redis.ts";
 import { createId } from "@/utils/create-id.ts";
 import { StatusCode } from "@/utils/status-code.ts";
-import { redis } from "@/lib/redis.ts";
 
 export const createLink: FastifyPluginCallbackZod = (app) => {
   app.post(
