@@ -16,6 +16,7 @@ services:
 
   redis:
     image: bitnami/redis:8.0.2
+    container_name: short_links_redis
     ports:
       - "6379:6379"
     environment:
