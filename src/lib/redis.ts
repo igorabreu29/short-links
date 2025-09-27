@@ -1,7 +1,9 @@
-import { createClient } from 'redis'
+import { createClient } from "redis";
+import { env } from "@/env.ts";
 
 export const redis = createClient({
-  url: 'redis://:docker@localhost:6379',
-})
+  url: `redis://:${env.REDIS_PASSWORD}@${env.REDIS_HOST}:${env.REDIS_PORT}`,
+  database: env.REDIS_DB,
+});
 
-redis.connect()
+await redis.connect();
