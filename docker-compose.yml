@@ -10,6 +10,9 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - ./docker/setup.sql:/docker-entrypoint-initdb.d/init.sql
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - links
 
   redis:
     image: bitnami/redis:8.0.2
@@ -17,3 +20,26 @@ services:
       - "6379:6379"
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - links
+    volumes:
+      - redis_data:/data
+
+  short_links_api:
+    build: .
+    container_name: short_links
+    env_file: .env
+    ports:
+      - 3333:3333
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - links
+
+networks:
+  links:
+    driver: bridge
+
+volumes:
+  pg_data:
