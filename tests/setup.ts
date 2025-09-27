@@ -1,6 +1,4 @@
-import { envSchema } from "@/env.ts";
 import { config } from "dotenv";
-import { required } from "node_modules/zod/v4/core/util.js";
 import postgres from "postgres";
 import { createClient } from "redis";
 import { afterAll, beforeAll, beforeEach } from "vitest";
