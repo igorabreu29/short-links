@@ -33,7 +33,7 @@ services:
       - NODE_ENV=${NODE_ENV}
       - PORT=${PORT}
       - DATABASE_URL=postgresql://docker:docker@postgres:5432/short_links
-      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_HOST=redis
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_DB=${REDIS_DB}
