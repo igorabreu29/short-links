@@ -28,7 +28,6 @@ RUN apk add --no-cache bash \
 COPY --from=build /usr/app/dist ./dist
 COPY --from=build /usr/app/node_modules ./node_modules
 COPY --from=build /usr/app/package.json ./package.json
-COPY --from=build /usr/app/.env ./.env
 COPY --from=build /usr/app/wait-for-it.sh ./wait-for-it.sh
 RUN chmod +x /usr/app/wait-for-it.sh
 
