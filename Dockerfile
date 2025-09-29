@@ -1,16 +1,14 @@
-FROM node:24.7-slim AS base
-
-RUN npm i -g pnpm
-
-FROM base AS dependencies
+FROM node:24.7-slim AS dependencies
 
 WORKDIR /usr/app
+
+RUN npm i -g pnpm
 
 COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
-FROM base AS build
+FROM dependencies AS build
 
 WORKDIR /usr/app
 
