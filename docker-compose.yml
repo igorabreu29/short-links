@@ -15,7 +15,7 @@ services:
       - links
 
   redis:
-    image: bitnami/redis:8.0.2
+    image: bitnamilegacy/redis:8.0.2
     container_name: short_links_redis
     ports:
       - "6379:6379"
@@ -24,7 +24,7 @@ services:
     networks:
       - links
     volumes:
-      - redis_data:/bitnami/redis/data
+      - redis_data:/bitnamilegacy/redis/data
 
   short_links_api:
     build: .
@@ -32,7 +32,7 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - PORT=${PORT}
-      - DATABASE_URL=postgresql://docker:docker@postgres:5432/short_links
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_HOST=redis
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_PORT=${REDIS_PORT}
