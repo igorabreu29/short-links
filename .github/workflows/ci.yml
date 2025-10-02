@@ -52,11 +52,13 @@ jobs:
         id: build-and-push
         run: |
           docker build -t $REGISTRY/short-links-api:$TAG .
-          docker push $REGISTRY/short-links-api:$TAG
+          docker tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:latest
+          docker push -a $REGISTRY/short-links-api
           IMAGE=$(echo $REGISTRY/short-links-api:$TAG)
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
       - name: Deploy to App Runner
+        id: deploy-app-runner
         uses: awslabs/amazon-app-runner-deploy@main
         with:
           service: short-links-api
@@ -66,6 +68,10 @@ jobs:
           cpu: 1
           memory: 2
           port: 3333
+          # wait-for-service-stability-seconds: 180 # 3m
+
+      - name: App Runner Check
+        run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service-url }}"
 
       # - name: Login into DockerHub
       #   uses: docker/login-action@v3
