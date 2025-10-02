@@ -58,11 +58,9 @@ jobs:
 
       - name: Deploy to App Runner
         uses: awslabs/amazon-app-runner-deploy@main
-        env:
-          IMAGE: ${{ steps.build-and-push.outputs.image }}
         with:
           service: short-links-api
-          image: $IMAGE
+          image: ${{ steps.build-and-push.outputs.image }}
           access-role-arn: arn:aws:iam::886579222777:role/app-runner-role
           region: us-east-1
           cpu: 1
