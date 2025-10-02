@@ -29,6 +29,11 @@ jobs:
           cache: "pnpm"
       - run: pnpm i
 
+      - name: Semantic Releases
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
       - name: Generate tag
         id: generate_tag
         run: |
@@ -53,7 +58,6 @@ jobs:
         run: |
           docker build -t $REGISTRY/short-links-api:$TAG .
           docker image tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:latest
-          docker image tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:$TAG
           docker push -a $REGISTRY/short-links-api
           IMAGE=$(echo $REGISTRY/short-links-api:$TAG)
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
