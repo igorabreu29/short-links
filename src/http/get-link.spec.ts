@@ -3,8 +3,8 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { app } from "@/app.ts";
 import { makeRequest } from "@/factories/make-request.ts";
 import { makeShortLink } from "@/factories/make-short-link.ts";
-import { StatusCode } from "@/utils/status-code.ts";
 import { redis } from "@/lib/redis.ts";
+import { StatusCode } from "@/utils/status-code.ts";
 
 describe("Get link (E2E)", () => {
   beforeAll(async () => {
