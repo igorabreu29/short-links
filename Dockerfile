@@ -33,4 +33,6 @@ RUN chmod +x /usr/app/wait-for-it.sh
 
 EXPOSE 3333
 
+ENV PORT=3333
+
 CMD ["pnpm", "start"]

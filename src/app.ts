@@ -11,6 +11,7 @@ import { createLink } from "./http/create-link.ts";
 import { getLink } from "./http/get-link.ts";
 import { getLinks } from "./http/get-links.ts";
 import { getLinksMetrics } from "./http/get-links-metrics.ts";
+import { healthCheck } from "./http/health-check.ts";
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 app.setSerializerCompiler(serializerCompiler);
@@ -48,6 +49,7 @@ if (env.NODE_ENV !== "prod") {
   });
 }
 
+app.register(healthCheck);
 app.register(createLink);
 app.register(getLinks);
 app.register(getLink);

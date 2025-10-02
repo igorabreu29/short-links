@@ -1,8 +1,8 @@
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import z from "zod";
 import { sql } from "@/lib/postgres.ts";
-import { StatusCode } from "@/utils/status-code.ts";
 import { redis } from "@/lib/redis.ts";
+import { StatusCode } from "@/utils/status-code.ts";
 
 interface Link {
   original_url: string;
@@ -44,8 +44,6 @@ export const getLinks: FastifyPluginCallbackZod = (app) => {
         FROM short_links
         ORDER BY created_at DESC;
       `;
-
-      console.log(links);
 
       await redis.set("links", JSON.stringify(links), {
         EX: 60 * 10, // 10 minutes,
