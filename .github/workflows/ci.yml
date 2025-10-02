@@ -38,8 +38,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::886579222777:role/ecr-role
-          aws-region: us-east-1
+          role-to-assume: ${{ vars.ecr_role }}
+          aws-region: ${{ vars.aws_region }}
 
       - name: Login to AWS ECR
         id: login-ecr
@@ -52,7 +52,8 @@ jobs:
         id: build-and-push
         run: |
           docker build -t $REGISTRY/short-links-api:$TAG .
-          docker tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:latest
+          docker image tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:latest
+          docker image tag $REGISTRY/short-links-api:$TAG $REGISTRY/short-links-api:$TAG
           docker push -a $REGISTRY/short-links-api
           IMAGE=$(echo $REGISTRY/short-links-api:$TAG)
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
@@ -63,8 +64,8 @@ jobs:
         with:
           service: short-links-api
           image: ${{ steps.build-and-push.outputs.image }}
-          access-role-arn: arn:aws:iam::886579222777:role/app-runner-role
-          region: us-east-1
+          access-role-arn: ${{ vars.app_runner_role }}
+          region: ${{ vars.aws_region }}
           cpu: 1
           memory: 2
           port: 3333
