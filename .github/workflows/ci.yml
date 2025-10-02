@@ -76,7 +76,7 @@ jobs:
           memory: 2
           port: 3333
           wait-for-service-stability-seconds: 180 # 3m
-          env-vars: |
+          env: |
             PORT=3333
             NODE_ENV=prod
             REDIS_HOST=localhost
