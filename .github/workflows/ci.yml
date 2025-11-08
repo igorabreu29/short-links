@@ -70,7 +70,7 @@ jobs:
         env:
           NODE_ENV: prod
           DATABASE_URL: postgresql://links_admin:npg_WKbsulQjk5Z9@ep-round-king-ad3jdso1-pooler.c-2.us-east-1.aws.neon.tech/short-links-db?sslmode=require&channel_binding=require
-          REDIS_HOST: 3.235.6.163
+          REDIS_HOST: 44.223.73.101
           REDIS_PASSWORD: docker
           REDIS_PORT: 6379
           REDIS_DB: 0
