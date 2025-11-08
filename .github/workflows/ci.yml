@@ -52,6 +52,24 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Gerar .env
+        env:
+          DATABASE_URL: postgresql://links_admin:npg_WKbsulQjk5Z9@ep-round-king-ad3jdso1-pooler.c-2.us-east-1.aws.neon.tech/short-links-db?sslmode=require&channel_binding=require
+          NODE_ENV: prod
+          REDIS_HOST: 3.235.6.163
+          REDIS_PASSWORD: docker
+          REDIS_PORT: 6379
+          REDIS_DB: 0
+        run: |
+          {
+            echo "NODE_ENV=$NODE_ENV"
+            echo "DATABASE_URL=$DATABASE_URL"
+            echo "REDIS_HOST=$REDIS_HOST"
+            echo "REDIS_PASSWORD=$REDIS_PASSWORD"
+            echo "REDIS_PORT=$REDIS_PORT"
+            echo "REDIS_DB=$REDIS_DB"
+          } > .env
+
       - name: Build and push docker image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -67,14 +85,6 @@ jobs:
       - name: Deploy to App Runner
         id: deploy-app-runner
         uses: awslabs/amazon-app-runner-deploy@main
-        env:
-          PORT: 3333
-          NODE_ENV: prod
-          REDIS_HOST: localhost
-          REDIS_PASSWORD: docker
-          REDIS_PORT: 6379
-          REDIS_DB: 0
-          DATABASE_URL: postgresql://docker:docker@localhost:5432/short_links
         with:
           service: short-links-api
           image: ${{ steps.build-and-push.outputs.image }}
@@ -84,14 +94,6 @@ jobs:
           memory: 2
           port: 3333
           wait-for-service-stability-seconds: 180 # 3m
-          copy-env-vars: |
-            PORT
-            NODE_ENV
-            REDIS_HOST
-            REDIS_PASSWORD
-            REDIS_PORT
-            REDIS_DB
-            DATABASE_URL
 
       - name: App Runner Check
         run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service-url }}"
