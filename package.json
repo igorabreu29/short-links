@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file .env ./src/server.ts",
-    "start": "node --watch ./dist/server.js",
+    "start": "pnpm setup:db:prod && node --watch ./dist/server.js",
     "build": "tsup",
     "test": "vitest run",
     "lint": "biome ci src",
+    "setup:db:prod": "node ./dist/setup.js",
     "setup:db": "tsx --env-file .env ./src/setup.ts",
     "compose:test:up": "docker compose -f docker-compose.test.yml up -d",
     "compose:up": "docker compose up -d"
