@@ -3,20 +3,20 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [
-    tsConfigPaths(),
-    swc.vite({
-      module: { type: "es6" },
-    }),
-    swc.rollup(),
-  ],
-  test: {
-    setupFiles: ["./tests/setup.ts"],
-    testTimeout: 60_000,
-    hookTimeout: 60_000,
-    pool: "threads",
-    coverage: {
-      enabled: false,
-    },
-  },
+	plugins: [
+		tsConfigPaths(),
+		swc.vite({
+			module: { type: "es6" },
+		}),
+		swc.rollup(),
+	],
+	test: {
+		setupFiles: ["./tests/setup.ts"],
+		testTimeout: 60_000,
+		hookTimeout: 60_000,
+		pool: "threads",
+		coverage: {
+			enabled: false,
+		},
+	},
 });
