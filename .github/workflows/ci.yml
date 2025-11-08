@@ -67,6 +67,13 @@ jobs:
       - name: Deploy to App Runner
         id: deploy-app-runner
         uses: awslabs/amazon-app-runner-deploy@main
+        env:
+          NODE_ENV: prod
+          DATABASE_URL: postgresql://links_admin:npg_WKbsulQjk5Z9@ep-round-king-ad3jdso1-pooler.c-2.us-east-1.aws.neon.tech/short-links-db?sslmode=require&channel_binding=require
+          REDIS_HOST: 3.235.6.163
+          REDIS_PASSWORD: docker
+          REDIS_PORT: 6379
+          REDIS_DB: 0
         with:
           service: short-links-api
           image: ${{ steps.build-and-push.outputs.image }}
@@ -75,14 +82,14 @@ jobs:
           cpu: 1
           memory: 2
           port: 3333
-          env: |
-            NODE_ENV=prod
-            DATABASE_URL=postgresql://links_admin:npg_WKbsulQjk5Z9@ep-round-king-ad3jdso1-pooler.c-2.us-east-1.aws.neon.tech/short-links-db?sslmode=require&channel_binding=require
-            REDIS_HOST=3.235.6.163
-            REDIS_PASSWORD=docker
-            REDIS_PORT=6379
-            REDIS_DB=0
-          wait-for-service-stability-seconds: 180 # 3m
+          copy-env-vars: |
+            NODE_ENV
+            DATABASE_URL
+            REDIS_HOST
+            REDIS_PASSWORD
+            REDIS_PORT
+            REDIS_DB
+          wait-for-service-stability-seconds: 240 # 4m
 
       - name: App Runner Check
         run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service-url }}"
