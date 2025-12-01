@@ -37,6 +37,7 @@
     "vitest": "3.2.4"
   },
   "dependencies": {
+    "@fastify/cors": "11.1.0",
     "@fastify/swagger": "9.5.2",
     "@scalar/fastify-api-reference": "1.36.1",
     "dotenv": "17.2.2",
