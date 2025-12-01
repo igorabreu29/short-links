@@ -1,22 +1,21 @@
-import swc from "unplugin-swc";
-import tsConfigPaths from "vite-tsconfig-paths";
-import { defineConfig } from "vitest/config";
+import swc from 'unplugin-swc'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
 	plugins: [
 		tsConfigPaths(),
 		swc.vite({
-			module: { type: "es6" },
+			module: { type: 'es6' },
 		}),
-		swc.rollup(),
 	],
 	test: {
-		setupFiles: ["./tests/setup.ts"],
+		setupFiles: ['./tests/setup.ts'],
 		testTimeout: 60_000,
 		hookTimeout: 60_000,
-		pool: "threads",
+		pool: 'threads',
 		coverage: {
 			enabled: false,
 		},
 	},
-});
+})
