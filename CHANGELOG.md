@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/igorabreu29/short-links/compare/v1.1.0...v1.2.0) (2025-11-08)
+
+
+### Features
+
+* adjusts ([b83339c](https://github.com/igorabreu29/short-links/commit/b83339c081fdf154e49795426385f84391aab920))
+
 # [1.1.0](https://github.com/igorabreu29/short-links/compare/v1.0.0...v1.1.0) (2025-11-08)
 
 
