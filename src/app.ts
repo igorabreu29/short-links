@@ -1,3 +1,4 @@
+import fastifyCors from '@fastify/cors'
 import fastify from 'fastify'
 import {
 	jsonSchemaTransform,
@@ -18,6 +19,10 @@ app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
 app.setErrorHandler(errorHandler)
+
+app.register(fastifyCors, {
+	origin: true,
+})
 
 if (env.NODE_ENV !== 'prod') {
 	await app.register(import('@fastify/swagger'), {

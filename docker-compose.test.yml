@@ -10,11 +10,18 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - ./docker/setup.sql:/docker-entrypoint-initdb.d/init.sql
+      - pg_data:/var/lib/postgresql
 
   redis:
-    image: bitnami/redis:8.0.2
+    image: bitnamilegacy/redis:8.0.2
     container_name: short_links_redis
     ports:
       - "6379:6379"
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/bitnamilegacy/redis/data
+
+volumes:
+  pg_data:
+  redis_data:

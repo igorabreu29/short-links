@@ -69,11 +69,11 @@ jobs:
         uses: awslabs/amazon-app-runner-deploy@main
         env:
           NODE_ENV: prod
-          DATABASE_URL: postgresql://links_admin:npg_WKbsulQjk5Z9@ep-round-king-ad3jdso1-pooler.c-2.us-east-1.aws.neon.tech/short-links-db?sslmode=require&channel_binding=require
-          REDIS_HOST: 44.223.73.101
-          REDIS_PASSWORD: docker
-          REDIS_PORT: 6379
-          REDIS_DB: 0
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          REDIS_DB: ${{ secrets.REDIS_DB }}
         with:
           service: short-links-api
           image: ${{ steps.build-and-push.outputs.image }}
