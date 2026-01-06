@@ -82,6 +82,8 @@ jobs:
           cpu: 1
           memory: 2
           port: 3333
+          network-configuration: |
+            {"EgressConfiguration": {"EgressType": "VPC", "VpcConnectorArn": "${{ vars.APP_RUNNER_VPC_CONNECTOR }}"}}
           copy-env-vars: |
             NODE_ENV
             DATABASE_URL
