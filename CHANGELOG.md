@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/igorabreu29/short-links/compare/v1.3.0...v1.4.0) (2026-01-06)
+
+
+### Features
+
+* remove message ([a085cd1](https://github.com/igorabreu29/short-links/commit/a085cd1648bfbdd22f316d13dbdf55496194ff7a))
+
 # [1.3.0](https://github.com/igorabreu29/short-links/compare/v1.2.0...v1.3.0) (2026-01-06)
 
 
