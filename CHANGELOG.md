@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/igorabreu29/short-links/compare/v1.2.0...v1.3.0) (2026-01-06)
+
+
+### Features
+
+* add message in health check ([a31ad26](https://github.com/igorabreu29/short-links/commit/a31ad26753618eba142da601a138fa53e5fc20ed))
+
 # [1.2.0](https://github.com/igorabreu29/short-links/compare/v1.1.0...v1.2.0) (2025-11-08)
 
 
