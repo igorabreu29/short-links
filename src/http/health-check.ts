@@ -12,6 +12,7 @@ export const healthCheck: FastifyPluginCallbackZod = (app) => {
         response: {
           200: z.object({
             ok: z.boolean(),
+            message: z.string()
           }),
         },
       },
@@ -19,6 +20,7 @@ export const healthCheck: FastifyPluginCallbackZod = (app) => {
     async (_, res) => {
       return res.status(StatusCode.OK).send({
         ok: true,
+        message: "Workinggggggggg!"
       });
     },
   );
