@@ -78,7 +78,7 @@ jobs:
           service: short-links-api
           image: ${{ steps.build-and-push.outputs.image }}
           access-role-arn: ${{ vars.app_runner_role }}
-          source-connection-arn: ${{ vars.APP_RUNNER_VPC_CONNECTOR }}
+          vpc-connection-arn: ${{ vars.APP_RUNNER_VPC_CONNECTOR }}
           region: ${{ vars.aws_region }}
           cpu: 1
           memory: 2
