@@ -90,7 +90,7 @@ jobs:
             REDIS_PASSWORD
             REDIS_PORT
             REDIS_DB
-          wait-for-service-stability-seconds: 240 # 4m
+          wait-for-service-stability-seconds: 1200
 
       - name: App Runner Check
         run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service-url }}"
